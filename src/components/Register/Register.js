@@ -58,6 +58,7 @@ export default function Register(props) {
             label="Contraseña"
             style={globalStyles.form.input}
             autoCapitalize='none'
+            secureTextEntry
             onChangeText={(text) => formik.setFieldValue('password', text)}
             value={formik.values.password}
             error={formik.errors.password}
@@ -66,6 +67,7 @@ export default function Register(props) {
             label="Confirmar contraseña"
             style={globalStyles.form.input}
             autoCapitalize='none'
+            secureTextEntry
             onChangeText={(text) => formik.setFieldValue('confirmPassword', text)}
             value={formik.values.confirmPassword}
             error={formik.errors.confirmPassword}

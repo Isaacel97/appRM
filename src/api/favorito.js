@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { enviroment as ENV } from "../util/constants"
-import { includes, pull } from "lodash"
+//dependencia de lodash (Ana Sol)
+// import { includes, pull } from "lodash"
 
 export const getFavorites = async () => {
   try {
@@ -28,8 +29,9 @@ export const addFavorites = async (id) => {
 export const isFavoriteApi = async (id) => {
   try {
     const favorites = await getFavorites()
-    console.log("isFavoriteApi::: ", includes(favorites, id));
-    return includes(favorites, id)
+    // console.log("isFavoriteApi::: ", includes(favorites, id));
+    // return includes(favorites, id)
+    return favorites.includes(id)
   } catch (error) {
     console.error("ERR isFavoriteApi::: ", error)
     return false
@@ -40,9 +42,13 @@ export const removeFavorite = async (id) => {
   console.log("Eliminando favorito id: ", id)
 
   try {
-    const favorites = await getFavorites()
-    const newFavorites = pull(favorites, id)
-    await AsyncStorage.setItem(ENV.STORAGE.FAVORITE, JSON.stringify(newFavorites))
+    // metodo Ana
+    // const favorites = await getFavorites()
+    // const newFavorites = pull(favorites, id)
+    // await AsyncStorage.setItem(ENV.STORAGE.FAVORITE, JSON.stringify(newFavorites))
+    let favorites = await getFavorites()
+    favorites = favorites.filter(favorite => favorite !== id)
+    await AsyncStorage.setItem(ENV.STORAGE.FAVORITE, JSON.stringify(favorites))
   } catch (error) {
     console.error("ERR removeFavorite::: ", error)
   }

@@ -55,6 +55,7 @@ export default function Login(props) {
             label="Contraseña"
             style={globalStyles.form.input}
             autoCapitalize='none'
+            secureTextEntry
             onChangeText={(text) => formik.setFieldValue('password', text)}
             value={formik.values.password}
             error={formik.errors.password}
