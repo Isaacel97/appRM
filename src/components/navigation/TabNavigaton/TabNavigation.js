@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Colors from "../../../constant/Color";
 import FavotiteScreen from "../../../screen/FavotiteScreen";
@@ -21,6 +21,9 @@ export default function TabNavigation() {
         component={MiCuenta}
         options={{
           title: "Mi cuenta",
+          headerStyle: {
+            backgroundColor: Colors.greenClaroRM,
+          },
         }}
       />
       <Tab.Screen

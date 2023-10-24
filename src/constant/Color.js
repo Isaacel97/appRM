@@ -5,5 +5,6 @@ export default Colors = {
     googleColor: '#ED1212',
     blueRM: '#02afc5',
     greenRM: '#70d208',
+    greenLightRM: '#00ff00',
     greenClaroRM: '#79B547',
 };

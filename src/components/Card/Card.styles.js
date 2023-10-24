@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        height: 320,
+        height: 335,
     },
     
     cardTitle: {
@@ -37,7 +37,8 @@ export const styles = StyleSheet.create({
 
     touchable: {
         flex: 1,
-        paddingEnd:8, 
+        marginHorizontal: 4,
+        paddingHorizontal:10, 
         marginBottom: 4,
     },
 
