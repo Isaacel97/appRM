@@ -5,6 +5,7 @@ export const enviroment = {
         RESGISTER: '/auth/local/register',
         LOGIN: '/auth/local',
         USERS_ME: '/users/me',
+        UPDATE_USER: '/users/:id',
     },
     STORAGE: {
         TOKEN: "token",

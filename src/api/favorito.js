@@ -1,36 +1,47 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { enviroment as ENV } from "../util/constants"
+import { getMe } from "../api/users";
+import { authFetch } from "../util/authFetch";
 //dependencia de lodash (Ana Sol)
 // import { includes, pull } from "lodash"
 
 export const getFavorites = async () => {
   try {
-    const response = await AsyncStorage.getItem(ENV.STORAGE.FAVORITE)
-    console.log("res getFavorites::: ", response)
-    return JSON.parse(response) || []
+    const user = await getMe()
+    return user.favorites || [];
   } catch (error) {
     console.error("ERR getFavorites", error)
     return []
   }
 }
 
-export const addFavorites = async (id) => {
+export const addFavorites = async (idFav) => {
   try {
-    console.log("añadir favoritos")
-    const favorites = await getFavorites()
-    favorites.push(id)
-    console.log("favoritos API::: ", favorites)
-    await AsyncStorage.setItem(ENV.STORAGE.FAVORITE, JSON.stringify(favorites))
-  } catch (err) {
-    console.error("ERR addFavorites: ", err)
+    const user = await getMe();
+    const currentFavorites = user.favorites || [];
+    currentFavorites.push(idFav);
+    const url = `${ENV.API_URL}${ENV.ENDPOINTS.UPDATE_USER.replace(':id', user.id)}`;
+    const response = await authFetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ favorites: currentFavorites }),
+    });
+
+    if (response.ok) {
+      console.log("Favorito agregado con éxito");
+    } else {
+      console.error("Error al agregar favorito: ", response.status, response.statusText);
+    }
+  } catch (error) {
+    console.error("ERR addFavorites::: ", error);
   }
 }
 
 export const isFavoriteApi = async (id) => {
   try {
     const favorites = await getFavorites()
-    // console.log("isFavoriteApi::: ", includes(favorites, id));
-    // return includes(favorites, id)
     return favorites.includes(id)
   } catch (error) {
     console.error("ERR isFavoriteApi::: ", error)
@@ -42,13 +53,23 @@ export const removeFavorite = async (id) => {
   console.log("Eliminando favorito id: ", id)
 
   try {
-    // metodo Ana
-    // const favorites = await getFavorites()
-    // const newFavorites = pull(favorites, id)
-    // await AsyncStorage.setItem(ENV.STORAGE.FAVORITE, JSON.stringify(newFavorites))
+    const user = await getMe();
     let favorites = await getFavorites()
     favorites = favorites.filter(favorite => favorite !== id)
-    await AsyncStorage.setItem(ENV.STORAGE.FAVORITE, JSON.stringify(favorites))
+    const url = `${ENV.API_URL}${ENV.ENDPOINTS.UPDATE_USER.replace(':id', user.id)}`;
+    const response = await authFetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ favorites: favorites }),
+    });
+
+    if (response.ok) {
+      console.log("Favorito eliminado con éxito");
+    } else {
+      console.error("Error al eliminar favorito: ", response.status, response.statusText);
+    }
   } catch (error) {
     console.error("ERR removeFavorite::: ", error)
   }

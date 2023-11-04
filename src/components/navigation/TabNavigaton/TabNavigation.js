@@ -2,10 +2,11 @@ import { Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Colors from "../../../constant/Color";
 import FavotiteScreen from "../../../screen/FavotiteScreen";
-import MiCuenta from "../../../screen/MiCuenta";
 import AwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { styles } from './TabNavigation.styles'
 import StackNavigation from "../StackNavigation/StackNavigation";
+import StackAccount from "../StackNavigation/StackAccount";
+import MiCuenta from "../../../screen/MiCuenta";
 
 export default function TabNavigation() {
   const Tab = createBottomTabNavigator();
@@ -18,12 +19,11 @@ export default function TabNavigation() {
       })} >
         <Tab.Screen
         name="Account"
-        component={MiCuenta}
+        component={StackAccount}
         options={{
           title: "Mi cuenta",
-          headerStyle: {
-            backgroundColor: Colors.greenClaroRM,
-          },
+          headerShown: false,
+          headerTransparent: true,
         }}
       />
       <Tab.Screen

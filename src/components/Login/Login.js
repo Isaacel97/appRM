@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { TextInput, Button, shadow } from 'react-native-paper'
+import { TextInput, Button } from 'react-native-paper'
 import { globalStyles } from '../../styles'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -10,7 +10,6 @@ import Toast from 'react-native-root-toast'
 
 
 export default function Login(props) {
-
   const { setShowLogin } = props;
   const { login } = useAuth();
 
@@ -20,7 +19,7 @@ export default function Login(props) {
   const formik = useFormik({
     initialValues: {
       identifier: '',
-        password: ''
+      password: ''
     },
     validationSchema: Yup.object({
       identifier: Yup.string().email(true).required(true),

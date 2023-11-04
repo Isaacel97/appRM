@@ -15,7 +15,7 @@ export default function AuthScreen() {
       <ImageBackground source={fondoSpace} resizeMode="cover" style={styles.fondo}>
         <Image source={ logo } style={styles.image} resizeMode='center'/>
 
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "heigh"} style={{flex: 1}}>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
             {showLogin ? <Login setShowLogin={setShowLogin} /> : <Register setShowLogin={setShowLogin}/>}
         </KeyboardAvoidingView>
       </ImageBackground>
