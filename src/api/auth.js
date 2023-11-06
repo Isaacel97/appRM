@@ -19,6 +19,8 @@ const register = async(email, username, password) => {
 }
 
 const login = async(identifier, password) => {
+    console.log("identifier", identifier);
+    console.log("password", password);
     try {
         const url = `${ENV.API_URL}${ENV.ENDPOINTS.LOGIN}`;
         const params = {
@@ -29,9 +31,11 @@ const login = async(identifier, password) => {
             body: JSON.stringify({ identifier, password })
         }
         const response = await fetch(url, params);
+        //console.log("response", response);
          if (response.status !== 200) throw response
          return response.json();
     } catch (error) {
+        //console.error("error", error);
         throw error;
     }
 }

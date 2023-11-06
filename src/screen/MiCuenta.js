@@ -3,15 +3,22 @@ import { useFocusEffect } from '@react-navigation/native';
 import { Text, ScrollView, Alert } from 'react-native'
 import { Button } from 'react-native-paper';
 import { useAuth } from '../hooks/useAuth';
+import { getMe } from '../api/users';
 import { styles } from '../styles/MiCuenta.styles';
 import Menu from '../components/Menu/Menu';
 
 const MiCuenta = () => {
-    const { logout, user: authUser } = useAuth();
-    const [user, setUser] = useState(authUser);
+    const { logout } = useAuth();
+    const [user, setUser] = useState({
+        firstname: '',
+        lastname: '',
+        email: ''
+    });
 
-    getAuth = () => {
-        setUser(authUser);
+    getAuth = async() => {
+        const res = await getMe();
+        console.log("res", res);
+        setUser(res);
     };
 
     const logoutAlert = () => {
@@ -32,12 +39,10 @@ const MiCuenta = () => {
     useFocusEffect(
         useCallback(() => {
             getAuth();
-        }, [authUser]),
+        }, []),  
     );
 
-    useEffect(() => {
-       console.log('Data user:', user);
-    }, []);
+
   return (
     <ScrollView style={styles.container}>
         <Text style={styles.title}>Bienvenido</Text>

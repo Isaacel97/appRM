@@ -13,9 +13,6 @@ export default function Login(props) {
   const { setShowLogin } = props;
   const { login } = useAuth();
 
-  // const useAuthData = useAuth();
-  // console.log(useAuthData);
-
   const formik = useFormik({
     initialValues: {
       identifier: '',

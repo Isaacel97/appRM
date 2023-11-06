@@ -15,10 +15,17 @@ const ChangeName = () => {
     firstname: '',
     lastname: ''
   });
-  const [loading, setLoading] = useState(false);
+
+  const setForm = () => {
+    formik.setValues({
+      firstname: user.firstname || '',
+      lastname: user.lastname || ''
+    });
+  }
 
   const dataUser = async () => {
     const res = await getMe();
+    console.log("res", res.firstname);
     setUser(res);
   };
 
@@ -27,13 +34,7 @@ const ChangeName = () => {
   }, []);
 
   useEffect(() => {
-    setLoading(true);
-    // Configura formik con los valores iniciales después de que user se haya actualizado
-    formik.setValues({
-      firstname: user.firstname || '',
-      lastname: user.lastname || ''
-    });
-    setLoading(false);
+    setForm();
   }, [user]);
 
   const formik = useFormik({
@@ -67,7 +68,7 @@ const ChangeName = () => {
     }
   });
 
-  return loading ? null : (
+  return (
     <View style={styles.container}>
       <ImageBackground source={fondoSpace} resizeMode="cover" style={styles.fondo}>
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
