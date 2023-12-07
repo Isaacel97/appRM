@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { KeyboardAvoidingView, View, ImageBackground } from 'react-native'
-import { TextInput, Button, IconButton } from 'react-native-paper'
+import { TextInput, Button } from 'react-native-paper'
 import { globalStyles } from '../../styles'
 import { styles } from './Account.style'
 import { useFormik } from 'formik'

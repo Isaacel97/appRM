@@ -73,7 +73,6 @@ export default function Register(props) {
             error={formik.errors.confirmPassword}
         />
 
-    
         <Button
             mode="contained"
             style={globalStyles.form.buttonSubmit}

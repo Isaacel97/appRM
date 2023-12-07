@@ -7,6 +7,5 @@ export const tokenExpired = (token) => {
     if(time > expired) {
         return true;
     }
-    return false;
-    
+    return false; 
 }

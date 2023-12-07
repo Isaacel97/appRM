@@ -8,7 +8,6 @@ import { authApi } from '../../api/auth'
 import { useAuth } from '../../hooks/useAuth'
 import Toast from 'react-native-root-toast'
 
-
 export default function Login(props) {
   const { setShowLogin } = props;
   const { login } = useAuth();

@@ -1,9 +1,9 @@
 import AppNavigation from "./AppNavigation";
 import AuthScreen from "../../screen/Auth/AuthScreen";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useA      uth";
 
 export default function RootNavigation() {
     const { user } = useAuth();
     return user ? <AppNavigation /> : <AuthScreen />;
-    
-    }
+}
+   
